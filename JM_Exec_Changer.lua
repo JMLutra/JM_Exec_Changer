@@ -1,5 +1,5 @@
 _PluginName = 'JM_Exec_Changer'
-_VERSION = 'v1.0'
+_VERSION = 'v1.1'
 
 -- Creates an Executor with a GoTo Menue to change the Target Executor to a set of Executors
 
@@ -98,6 +98,7 @@ function BuildCleanMacro()
     CreateMacro(i, 'Clean '..TargetExec, {
         'Delete Executor '..TargetExec..' /nc',
         'Delete Executor '..SelectExec..' /nc',
+        'Delete Macro 1.'..i..' /nc'
     })
 end
 
