@@ -1,10 +1,10 @@
 _PluginName = 'JM_Exec_Changer'
-_VERSION = 'v1.1'
+_VERSION = 'v1.2'
 
 -- Creates an Executor with a GoTo Menue to change the Target Executor to a set of Executors
 
 -- Created by Johannes Münch
--- Last updated Aug 11, 2023
+-- Last updated Aug 14, 2023
 -- E-Mail: maplugins@jmlutra.de
 
 
@@ -57,6 +57,21 @@ function Main()
     goto loopin
     ::loopout::
 
+end
+
+function JM_Exec_Changer(target, select, choiceExecs)
+    TargetExec = target
+    SelectExec = select
+    ChoiceExecs = { }
+    for value in choiceExecs:gmatch("([^,]+)") do
+        -- Remove leading and trailing spaces
+        value = value:match("^%s*(.-)%s*$")
+        -- Add the value to the table
+        table.insert(ChoiceExecs, value)
+    end
+    BuildSelectExecutor()
+    BuildCleanMacro()
+    
 end
 
 function SelectChoiceExecs()
