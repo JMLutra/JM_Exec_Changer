@@ -1,10 +1,10 @@
 _PluginName = 'JM_Exec_Changer'
-_VERSION = 'v1.2'
+_VERSION = 'v1.3'
 
 -- Creates an Executor with a GoTo Menue to change the Target Executor to a set of Executors
 
 -- Created by Johannes Münch
--- Last updated Aug 14, 2023
+-- Last updated Oct 3, 2023
 -- E-Mail: maplugins@jmlutra.de
 
 
@@ -95,10 +95,14 @@ end
 
 function BuildSelectExecutor()
     for i=1, Tablelength(ChoiceExecs) do
+        if Obj.name(Obj.handle('Executor '..ChoiceExecs[i])) == nil then
+            goto nomoreexecs
+        end
         Cmd('Store Executor '..SelectExec..' Cue '..i)
         Cmd('Assign Executor '..SelectExec..' Cue '..i..' /cmd=\"Off Executor '..TargetExec..';  Copy Executor '..ChoiceExecs[i]..'  At '..TargetExec..' /o\"')
         Cmd('Label Executor '..SelectExec..' Cue '..i..' \"'..Obj.name(Obj.handle('Executor '..ChoiceExecs[i]))..'\"')
     end
+    ::nomoreexecs::
     Cmd('Assign Goto ExecButton1 '..SelectExec)
     Cmd('Label Executor '..SelectExec..' \"Select Executor '..TargetExec..' Functions\"')
 end
